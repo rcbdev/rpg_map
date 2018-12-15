@@ -14,15 +14,15 @@ const RpgMap = ({ width, height }) => {
     [onCellClick, getCellContents]
   );
 
-  const [zoom] = useZoom(4);
-
-  const zoomFactor = Math.sqrt(zoom);
-  const cellSize = 50 * zoomFactor;
+  const [zoom] = useZoom(2);
+  const cellSize = Math.round(50 * zoom);
 
   const style = {
     lineHeight: `${cellSize}px`,
-    fontSize: `${zoomFactor}rem`
+    fontSize: `${zoom}rem`
   };
+
+  console.log(zoom);
 
   return (
     <Grid
