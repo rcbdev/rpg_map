@@ -1,15 +1,35 @@
-.Grid {
+.page-with-sidebar {
+  display: grid;
+  grid-template-columns: auto 250px;
+}
+
+.page-with-sidebar > div {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.full-page {
+  height: 100vh;
+  width: 100vw;
+}
+
+.map {
   background-color: #282c34;
-  color: white;
+  color: #fff;
   text-align: center;
   font-weight: bold;
 }
 
-.Cell {
-  border: 0.5px solid white;
+.cell {
+  border: 0.5px solid #fff;
   cursor: pointer;
 }
 
-.Cell-Selected {
+.cell-selected {
   font-size: 1.75em;
+}
+
+.sidebar {
+  background-color: #fff;
+  color: #282c34;
 }

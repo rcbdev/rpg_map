@@ -8,20 +8,20 @@ const defaultMapItems = [
 ];
 
 const defaultPlayers = [
-  { x: 2, y: 0, text: "A" },
-  { x: 1, y: 5, text: "B" },
-  { x: 8, y: 1, text: "C" },
-  { x: 7, y: 0, text: "D" },
-  { x: 0, y: 2, text: "E" },
-  { x: 1, y: 4, text: "F" },
-  { x: 5, y: 4, text: "G" },
-  { x: 15, y: 4, text: "H" },
-  { x: 5, y: 14, text: "I" },
-  { x: 15, y: 14, text: "J" },
-  { x: 11, y: 4, text: "K" },
-  { x: 7, y: 6, text: "L" },
-  { x: 9, y: 11, text: "M" },
-  { x: 15, y: 7, text: "N" }
+  { x: 2, y: 0, name: "Alpha" },
+  { x: 1, y: 5, name: "Bravo" },
+  { x: 8, y: 1, name: "Charlie" },
+  { x: 7, y: 0, name: "Delta" },
+  { x: 0, y: 2, name: "Echo" },
+  { x: 1, y: 4, name: "Foxtrot" },
+  { x: 5, y: 4, name: "Golf" },
+  { x: 15, y: 4, name: "Hotel" },
+  { x: 5, y: 14, name: "Indigo" },
+  { x: 15, y: 14, name: "Juliet" },
+  { x: 11, y: 4, name: "Kilo" },
+  { x: 7, y: 6, name: "Lima" },
+  { x: 9, y: 11, name: "Mike" },
+  { x: 15, y: 7, name: "November" }
 ];
 
 export { defaultMapItems, defaultPlayers };
