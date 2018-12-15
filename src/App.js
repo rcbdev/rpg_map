@@ -6,13 +6,7 @@ import { useWindowSize } from "./utils";
 const App = () => {
   const { width, height } = useWindowSize();
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <RpgMap width={width} height={height} />
-      </header>
-    </div>
-  );
+  return <RpgMap width={width} height={height} />;
 };
 
 export default App;

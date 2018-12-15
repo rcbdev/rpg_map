@@ -1,18 +1,7 @@
-.App {
-  text-align: center;
-}
-
-body {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: white;
-}
-
 .Grid {
+  background-color: #282c34;
+  color: white;
+  text-align: center;
   font-weight: bold;
 }
 

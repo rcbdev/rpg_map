@@ -33,4 +33,18 @@ const useKeyHandlers = (handlers, inputs) => {
   }, inputs);
 };
 
-export { useWindowSize, useKeyHandlers };
+const useZoom = defaultZoom => {
+  const [zoom, setZoom] = useState(defaultZoom);
+
+  useKeyHandlers(
+    {
+      "+": () => setZoom(z => Math.min(16, z + 1)),
+      "-": () => setZoom(z => Math.max(1, z - 1))
+    },
+    []
+  );
+
+  return [zoom, setZoom];
+};
+
+export { useWindowSize, useKeyHandlers, useZoom };

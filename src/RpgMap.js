@@ -3,7 +3,7 @@ import { FixedSizeGrid as Grid } from "react-window";
 import produce from "immer";
 import RpgMapCell from "./RpgMapCell";
 import { defaultMapItems, defaultPlayers } from "./data";
-import { useKeyHandlers } from "./utils";
+import { useZoom } from "./utils";
 
 const isSameCell = (a, b) => a && b && a.x === b.x && a.y === b.y;
 const getCellKey = cell => `${cell.x}-${cell.y}`;
@@ -12,7 +12,7 @@ const RpgMap = ({ width, height }) => {
   const [players, setPlayers] = useState(defaultPlayers);
   const [mapItems, setMapItems] = useState(defaultMapItems);
   const [selectedCell, setSelectedCell] = useState(null);
-  const [zoom, setZoom] = useState(2);
+  const [zoom] = useZoom(4);
 
   const handleCellClick = useCallback(
     cell => {
@@ -55,7 +55,8 @@ const RpgMap = ({ width, height }) => {
 
   const cellRenderer = ({ columnIndex: x, rowIndex: y, style }) => {
     const cell = { x, y };
-    const item = cellContents.get(getCellKey(cell)) || {};
+    const key = getCellKey(cell);
+    const item = cellContents.get(key) || {};
     const itemStyle = (item && item.style) || {};
     const selected = isSameCell(selectedCell, cell);
 
@@ -69,18 +70,11 @@ const RpgMap = ({ width, height }) => {
     );
   };
 
-  useKeyHandlers(
-    {
-      "+": () => setZoom(z => Math.min(5, z + 1)),
-      "-": () => setZoom(z => Math.max(1, z - 1))
-    },
-    []
-  );
-
-  const cellSize = 50 * zoom;
+  const zoomFactor = Math.sqrt(zoom);
+  const cellSize = 50 * zoomFactor;
   const style = {
     lineHeight: `${cellSize}px`,
-    fontSize: `${zoom}rem`
+    fontSize: `${zoomFactor}rem`
   };
 
   return (
