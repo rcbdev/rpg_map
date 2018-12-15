@@ -60,18 +60,21 @@ const RpgMapContextProvider = ({ children }) => {
     [mapItems, players]
   );
 
-  const getCellContents = cell => {
-    const key = getCellKey(cell);
-    const item = cellContents.get(key) || {};
-    const itemStyle = (item && item.style) || {};
-    const selected = isSameCell(selectedCell, cell);
+  const getCellContents = useCallback(
+    cell => {
+      const key = getCellKey(cell);
+      const item = cellContents.get(key) || {};
+      const itemStyle = (item && item.style) || {};
+      const selected = isSameCell(selectedCell, cell);
 
-    return {
-      item,
-      itemStyle,
-      selected
-    };
-  };
+      return {
+        item,
+        itemStyle,
+        selected
+      };
+    },
+    [cellContents, selectedCell]
+  );
 
   return (
     <RpgMapContext.Provider

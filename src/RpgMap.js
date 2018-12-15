@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import { FixedSizeGrid as Grid } from "react-window";
 import RpgMapCell from "./RpgMapCell";
 import { useZoom } from "./hooks";
@@ -6,25 +6,19 @@ import { RpgMapContext } from "./RpgMapContext";
 
 const RpgMap = ({ width, height }) => {
   const { onCellClick, getCellContents } = useContext(RpgMapContext);
+  const itemData = useMemo(
+    () => ({
+      onCellClick,
+      getCellContents
+    }),
+    [onCellClick, getCellContents]
+  );
 
   const [zoom] = useZoom(4);
 
   const zoomFactor = Math.sqrt(zoom);
   const cellSize = 50 * zoomFactor;
 
-  const cellRenderer = ({ columnIndex: x, rowIndex: y, style }) => {
-    const cell = { x, y };
-    const { item, itemStyle, selected } = getCellContents(cell);
-
-    return (
-      <RpgMapCell
-        onClick={() => onCellClick(cell)}
-        item={item}
-        style={{ ...style, ...itemStyle }}
-        selected={selected}
-      />
-    );
-  };
   const style = {
     lineHeight: `${cellSize}px`,
     fontSize: `${zoomFactor}rem`
@@ -39,9 +33,10 @@ const RpgMap = ({ width, height }) => {
       width={width}
       height={height}
       style={style}
+      itemData={itemData}
       className="map"
     >
-      {cellRenderer}
+      {RpgMapCell}
     </Grid>
   );
 };
