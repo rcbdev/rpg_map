@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useCallback, useMemo } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import { FixedSizeGrid as Grid } from "react-window";
 import produce from "immer";
-import MapCell from "./MapCell";
+import RpgMapCell from "./RpgMapCell";
 import { defaultMapItems, defaultPlayers } from "./data";
 import { useKeyHandlers } from "./utils";
 
 const isSameCell = (a, b) => a && b && a.x === b.x && a.y === b.y;
 const getCellKey = cell => `${cell.x}-${cell.y}`;
 
-const Map = ({ width, height }) => {
+const RpgMap = ({ width, height }) => {
   const [players, setPlayers] = useState(defaultPlayers);
   const [mapItems, setMapItems] = useState(defaultMapItems);
   const [selectedCell, setSelectedCell] = useState(null);
@@ -41,26 +41,26 @@ const Map = ({ width, height }) => {
       return allItems.reduce((rv, curr) => {
         const key = getCellKey(curr);
 
-        if (!rv[key]) {
-          rv[key] = curr;
+        if (!rv.has(key)) {
+          rv.set(key, curr);
         } else {
-          rv[key] = { ...rv[key], ...curr };
+          rv.set(key, { ...rv.get(key), ...curr });
         }
 
         return rv;
-      }, {});
+      }, new Map());
     },
     [mapItems, players]
   );
 
   const cellRenderer = ({ columnIndex: x, rowIndex: y, style }) => {
     const cell = { x, y };
-    const item = cellContents[getCellKey(cell)] || {};
+    const item = cellContents.get(getCellKey(cell)) || {};
     const itemStyle = (item && item.style) || {};
     const selected = isSameCell(selectedCell, cell);
 
     return (
-      <MapCell
+      <RpgMapCell
         onClick={() => handleCellClick(cell)}
         item={item}
         style={{ ...style, ...itemStyle }}
@@ -99,4 +99,4 @@ const Map = ({ width, height }) => {
   );
 };
 
-export default Map;
+export default RpgMap;

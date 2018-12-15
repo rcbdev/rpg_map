@@ -1,6 +1,6 @@
 import React from "react";
 
-const MapCell = ({ item, style, onClick, selected }) => (
+const RpgMapCell = ({ item, style, onClick, selected }) => (
   <div
     style={style}
     className={`Cell ${selected ? "Cell-Selected" : ""}`}
@@ -10,4 +10,4 @@ const MapCell = ({ item, style, onClick, selected }) => (
   </div>
 );
 
-export default MapCell;
+export default RpgMapCell;

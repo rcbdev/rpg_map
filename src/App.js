@@ -1,5 +1,5 @@
 import React from "react";
-import Map from "./Map";
+import RpgMap from "./RpgMap";
 import "./App.css";
 import { useWindowSize } from "./utils";
 
@@ -9,7 +9,7 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <Map width={width} height={height} />
+        <RpgMap width={width} height={height} />
       </header>
     </div>
   );
