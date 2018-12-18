@@ -1,23 +1,38 @@
 import { useEffect, useState } from "react";
 
-const getWindowSize = () => {
-  return {
-    width: window.innerWidth,
-    height: window.innerHeight
-  };
-};
+const useSyncedState = (defaultState, key) => {
+  const [value, setValue] = useState(defaultState);
 
-const useWindowSize = () => {
-  const [windowSize, setWindowSize] = useState(getWindowSize());
+  const setValueInStorage = x => {
+    const newValue = typeof x === "function"
+      ? x(value)
+      : x;
+    localStorage.setItem(key, JSON.stringify(newValue));
+    setValue(newValue);
+  };
 
   useEffect(() => {
-    const handleResize = () => setWindowSize(getWindowSize());
-    window.addEventListener("resize", handleResize);
+    const handler = e => {
+      if (e.key === key) {
+        if (e.newValue) {
+          setValue(JSON.parse(e.newValue));
+        } else {
+          setValue(defaultState);
+        }
+      }
+    };
 
-    return () => window.removeEventListener("resize", handleResize);
+    const restored = localStorage.getItem(key);
+    if (restored) {
+      setValue(JSON.parse(restored));
+    }
+
+    window.addEventListener("storage", handler);
+
+    return () => window.removeEventListener("storage", handler);
   }, []);
 
-  return windowSize;
+  return [value, setValueInStorage];
 };
 
 const useKeyHandlers = (handlers, inputs) => {
@@ -49,4 +64,4 @@ const useZoom = defaultZoom => {
   return [zoom];
 };
 
-export { useWindowSize, useKeyHandlers, useZoom };
+export { useKeyHandlers, useZoom, useSyncedState };

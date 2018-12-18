@@ -2,6 +2,7 @@ import React, { useState, useCallback, useMemo } from "react";
 import produce from "immer";
 import { defaultMapItems, defaultPlayers } from "./data";
 import { isSameCell, getCellKey } from "./utils";
+import { useSyncedState } from "./hooks";
 
 const RpgMapContext = React.createContext({
   players: null,
@@ -51,7 +52,7 @@ const getDistanceIndicators = (selectedCell, moveDistance) => {
 };
 
 const RpgMapContextProvider = ({ children }) => {
-  const [players, setPlayers] = useState(mappedDefaultPlayers);
+  const [players, setPlayers] = useSyncedState(mappedDefaultPlayers, "players");
   const [mapItems, setMapItems] = useState(defaultMapItems);
   const [selectedCell, setSelectedCell] = useState(null);
 

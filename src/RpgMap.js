@@ -22,8 +22,6 @@ const RpgMap = ({ width, height }) => {
     fontSize: `${zoom}rem`
   };
 
-  console.log(zoom);
-
   return (
     <Grid
       columnCount={100}
