@@ -5,7 +5,7 @@
   "dependencies": {
     "react-dom": "^16.11.0",
     "react": "^16.11.0",
-    "immer": "^5.0.0",
+    "immer": "^5.0.1",
     "prettier": "^1.18.2",
     "react-resize-detector": "^4.2.1",
     "react-scripts": "3.2.0",
